@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="ServiceDeskBot.Api/ServiceDeskBot.Api.csproj" />
+  <Project Path="ServiceDeskBot.ChatEngine/ServiceDeskBot.ChatEngine.csproj" />
+  <Project Path="ServiceDeskBot.Domain/ServiceDeskBot.Domain.csproj" />
+  <Project Path="ServiceDeskBot.Infrastructure/ServiceDeskBot.Infrastructure.csproj" />
+  <Project Path="ServiceDeskBot.Tests/ServiceDeskBot.Tests.csproj" />
+</Solution>

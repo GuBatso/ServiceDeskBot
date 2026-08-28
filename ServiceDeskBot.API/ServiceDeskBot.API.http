@@ -1,0 +1,6 @@
+@ServiceDeskBot.API_HostAddress = http://localhost:5062
+
+GET {{ServiceDeskBot.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
