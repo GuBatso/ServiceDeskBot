@@ -390,7 +390,7 @@ Alternativa avaliada e descartada por ora: Java/Spring Boot — tecnicamente equ
 | 1 | Levantamento de requisitos | ✅ Concluída |
 | 2 | Arquitetura | ✅ Concluída |
 | 3 | Modelagem do banco | ✅ Concluída |
-| 4 | Backend | 🔄 Em andamento — modelo de domínio concluído (`Local`, `Setor`, `Categoria`, `SubCategoria`, `Equipamento`, `Chamado` + enums `StatusChamado`/`PrioridadeChamado`). Próximo: `Usuario`, `Tecnico`, `HistoricoChamado`, `InteracaoChatbot`, depois `DbContext` (Infrastructure) |
+| 4 | Backend | 🔄 Em andamento — modelo de domínio 100% concluído (10 entidades + enums `StatusChamado`/`PrioridadeChamado`). Próximo: `DbContext` (Infrastructure) e mapeamento via Fluent API |
 | 5 | Sistema de chamados | Pendente |
 | 6 | Integração com WhatsApp | Pendente |
 | 7 | Fluxo conversacional | Pendente |
@@ -407,7 +407,7 @@ Alternativa avaliada e descartada por ora: Java/Spring Boot — tecnicamente equ
 
 As Fases 1 a 3 estão concluídas e documentadas acima. Na Fase 4 (Backend), a estrutura de solução .NET já foi criada com projetos fisicamente separados (`Api`, `Domain`, `ChatEngine`, `Infrastructure`, `Tests`) e as referências entre projetos configuradas respeitando a regra "Domain não depende de nada".
 
-O modelo de domínio (POCOs puros, sem dependência de EF Core) está concluído:
+O modelo de domínio (POCOs puros, sem dependência de EF Core) está **100% concluído** — as 10 entidades e os 2 enums planejados na Fase 3:
 
 ```
 ServiceDeskBot.Domain/
@@ -417,7 +417,11 @@ ServiceDeskBot.Domain/
  │   ├─ Categoria.cs
  │   ├─ SubCategoria.cs
  │   ├─ Equipamento.cs
- │   └─ Chamado.cs
+ │   ├─ Chamado.cs
+ │   ├─ Usuario.cs
+ │   ├─ Tecnico.cs
+ │   ├─ HistoricoChamado.cs
+ │   └─ InteracaoChatbot.cs
  └─ Enums/
      ├─ StatusChamado.cs
      └─ PrioridadeChamado.cs
@@ -427,5 +431,8 @@ Decisões consolidadas durante a implementação:
 - FKs obrigatórias vs. opcionais aplicadas com `int`/`int?` conforme a regra de negócio de cada relacionamento (ex: `LocalId` obrigatório, `TecnicoId` opcional até o chamado ser assumido).
 - Datas que só existem a partir de um certo ponto do fluxo usam `DateTime?` (`DataInicioAtendimento`, `DataConclusao`); `DataAbertura` é obrigatória.
 - `Status` e `Prioridade` modelados como `enum` (`StatusChamado`, `PrioridadeChamado`) em vez de `string`, para eliminar valores inválidos em tempo de compilação.
+- Campos de senha nomeados `SenhaHash` (nunca `Senha`), deixando explícito que a senha original nunca é persistida — reforça o RNF-02.
+- `HistoricoChamado.AlteradoPorId` é opcional e não se chama `TecnicoId`, pois alterações podem ser geradas pelo próprio sistema (ex: criação automática do chamado pelo chatbot), sem um técnico envolvido.
+- `InteracaoChatbot.ChamadoId` é opcional, pois a conversa começa antes de o chamado existir (ele só é criado ao final do fluxo de confirmação).
 
-**Próximo passo:** completar as entidades restantes do domínio (`Usuario`, `Tecnico`, `HistoricoChamado`, `InteracaoChatbot`) e, em seguida, iniciar o `DbContext` do EF Core no projeto `Infrastructure`, com o mapeamento via Fluent API (mantendo as classes de `Domain` livres de qualquer anotação do EF Core).
+**Próximo passo:** iniciar o `DbContext` do EF Core no projeto `Infrastructure`, com o mapeamento via Fluent API (mantendo as classes de `Domain` livres de qualquer anotação do EF Core).
