@@ -9,7 +9,7 @@ namespace ServiceDeskBot.Domain.Entidades
     public class Chamado
     {
         public int Id { get; set; }
-        public string NumeroChamado { get; set; }
+        public required string NumeroChamado { get; set; }
         
         public int UsuarioId { get; set; }
         public int LocalId { get; set; }
@@ -17,8 +17,8 @@ namespace ServiceDeskBot.Domain.Entidades
         public int? SubCategoriaId { get; set; }
         public int? EquipamentoId { get; set; }
         public int? TecnicoId { get; set; }
-        public string Descricao { get; set; }
-        public string Impacto { get; set; }
+        public required string Descricao { get; set; }
+        public required string Impacto { get; set; }
 
         public DateTime DataAbertura { get; set; }
 
@@ -26,9 +26,9 @@ namespace ServiceDeskBot.Domain.Entidades
 
         public DateTime? DataConclusao { get; set; }
 
-        public string Diagnostico { get; set; }
-        public string Solucao { get; set; }
-        public string Observacao { get; set; }
+        public string? Diagnostico { get; set; }
+        public string? Solucao { get; set; }
+        public string? Observacao { get; set; }
         public StatusChamado Status { get; set; }
 
         public PrioridadeChamado Prioridade { get; set; }

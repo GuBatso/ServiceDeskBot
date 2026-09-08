@@ -6,6 +6,6 @@ namespace ServiceDeskBot.Domain.Entidades
     {
         public int Id { get; set; }
         public int CategoriaId { get; set; }
-        public string Nome { get; set; }
+        public required string Nome { get; set; }
     }
 }
