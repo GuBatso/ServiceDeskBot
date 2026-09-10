@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ServiceDeskBot.Domain.Entidades
 {
     public class Equipamento
@@ -10,6 +12,9 @@ namespace ServiceDeskBot.Domain.Entidades
         public string? Patrimonio { get; set; }
         public bool Critico { get; set; } //se a indisponibilidade do equipamento impacta o negócio
 
+        public Local? Local { get; set; }
+        public Setor? Setor { get; set; }
 
+        public ICollection<Chamado> Chamados { get; set; } = new List<Chamado>();
     }
 }

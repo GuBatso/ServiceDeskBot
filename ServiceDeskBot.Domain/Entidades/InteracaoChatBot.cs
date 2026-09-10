@@ -7,10 +7,12 @@ namespace ServiceDeskBot.Domain.Entidades
 {
     public int Id { get; set; }
     public int UsuarioId { get; set; }
+    public Usuario? Usuario { get; set; }
     public int? ChamadoId { get; set; }
+    public Chamado? Chamado { get; set; }
     public required string Estado { get; set; }
     public required string MensagemRecebida { get; set; }
-    public string MensagemEnviada { get; set; }
+    public string? MensagemEnviada { get; set; }
     public DateTime Timestamp { get; set; }
 }
 }

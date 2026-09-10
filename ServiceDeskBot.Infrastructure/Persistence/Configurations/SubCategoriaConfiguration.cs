@@ -4,15 +4,15 @@ using ServiceDeskBot.Domain.Entidades;
 
 namespace ServiceDeskBot.Infrastructure.Persistence.Configurations
 {
-public class SubCategoriaConfiguration : IEntityTypeConfiguration<SubCategoria>
-{
-    public void Configure(EntityTypeBuilder<SubCategoria> builder)
+    public class SubCategoriaConfiguration : IEntityTypeConfiguration<SubCategoria>
     {
-        builder.ToTable("SubCategorias");
+        public void Configure(EntityTypeBuilder<SubCategoria> builder)
+        {
+            builder.ToTable("SubCategorias");
 
-        builder.Property(sc => sc.Nome)
-            .IsRequired()
-            .HasMaxLength(100);
+            builder.Property(sc => sc.Nome)
+                .IsRequired()
+                .HasMaxLength(100);
+        }
     }
-}
 }
