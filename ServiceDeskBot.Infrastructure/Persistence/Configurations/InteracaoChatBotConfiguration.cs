@@ -15,12 +15,10 @@ namespace ServiceDeskBot.Infrastructure.Persistence.Configurations
                 .HasMaxLength(50);
 
             builder.Property(i => i.MensagemRecebida)
-                .IsRequired()
-                .HasMaxLength(500);
+                .IsRequired();
             
             builder.Property(i => i.MensagemEnviada)
-                .IsRequired(false)
-                .HasMaxLength(500);
+                .IsRequired(false);
 
             builder.Property(i => i.Timestamp)
                 .IsRequired();  

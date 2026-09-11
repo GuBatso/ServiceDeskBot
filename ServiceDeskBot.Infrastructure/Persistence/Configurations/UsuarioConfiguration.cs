@@ -22,7 +22,10 @@ namespace ServiceDeskBot.Infrastructure.Persistence.Configurations
             builder.Property(u => u.Telefone)
                 .HasMaxLength(13)
                 .IsRequired(); // Garante que o telefone seja obrigatório
-                
+
+        builder.Property(u => u.Ativo)
+            .IsRequired() // Garante que o campo Ativo seja obrigatório
+            .HasDefaultValue(true); // Define o valor padrão como true
         }
     }
 }

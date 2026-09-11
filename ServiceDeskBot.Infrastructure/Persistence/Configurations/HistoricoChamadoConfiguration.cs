@@ -21,12 +21,13 @@ namespace ServiceDeskBot.Infrastructure.Persistence.Configurations
 
             builder.Property(h => h.ValorNovo)
                 .IsRequired();
-            
+
             builder.Property(h => h.ValorAnterior)
                 .IsRequired(false);
 
-            builder.Property(h => h.AlteradoPorId)
-                .IsRequired();
+            builder.HasOne(h => h.AlteradoPor)
+                .WithMany(t => t.AlteracoesFeitas)
+                .HasForeignKey(h => h.AlteradoPorId);
         }
     }
 }
